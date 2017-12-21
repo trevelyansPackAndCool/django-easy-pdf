@@ -15,6 +15,13 @@ Django PDF rendering, the easy way.
 
 Developed at `en.ig.ma software shop <http://en.ig.ma>`_.
 
+Development Version
+-------------------
+
+Note: A new PDF rendering backend using WeasyPrint for more accurate rendering is in development under the develop branch.
+See https://github.com/nigma/django-easy-pdf/pull/34 for changes, testing and discussion.
+
+If you rely on the ``xhtml2pdf`` rendering backend and templates pin the package version to ``django-easy-pdf>=0.1.1<0.2.0``.
 
 Overview
 --------
@@ -35,6 +42,8 @@ Quickstart
 
 1. Include ``django-easy-pdf>=0.2.0`` and ``WeasyPrint>=0.34`` in your ``requirements.txt`` file
    and install necessary system packages.
+
+    $ pip install xhtml2pdf>=0.2b1
 
 2. Add ``easy_pdf`` to ``INSTALLED_APPS``.
 

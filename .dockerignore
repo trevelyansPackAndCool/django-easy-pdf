@@ -38,3 +38,7 @@ docs/_build/
 .gitignore
 docker-compose.yml
 Dockerfile
+
+.coverage
+nosetests.xml
+artifacts
