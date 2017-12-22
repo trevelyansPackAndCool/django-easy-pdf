@@ -48,10 +48,11 @@ docs:
 
 release: lint test docs clean dist upload
 
-sdist:
+sdist: clean
 	python setup.py sdist
+	ls -l dist
 
-dist:
+dist: clean
 	python setup.py sdist bdist_wheel
 
 upload:

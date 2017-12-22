@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 basename = os.path.splitext(os.path.basename(__file__))[0]
 
@@ -23,7 +23,6 @@ TIMEZONE = 'UTC'
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django_nose',
     'easy_pdf',
     'tests'
 ]
