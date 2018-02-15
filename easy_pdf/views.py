@@ -19,6 +19,9 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
     A mixin class that implements PDF rendering and Django response construction.
     """
 
+    #: Optional name of the PDF file when displayed in browser.
+    inline_filename = ''  # type: Optional[Text]
+
     #: Optional name of the PDF file for download. Leave blank for display in browser.
     download_filename = None  # type: Optional[Text]
 
@@ -42,6 +45,16 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
         """
         return self.download_filename
 
+    def get_inline_filename(self):  # type: () -> Optional[Text]
+        """
+        Returns :attr:`inline_filename` value by default.
+
+        Will set the filename when displaying the PDF inline.
+
+        :rtype: :class:`str` or None
+        """
+        return self.inline_filename
+
     def get_base_url(self):  # type: () -> Optional[Text]
         """
         Returns :attr:`base_url` value by default.
@@ -56,6 +69,7 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
 
         """
         return {
+            'inline_filename': self.get_inline_filename(),
             'download_filename': self.get_download_filename(),
             'base_url': self.get_base_url()
         }

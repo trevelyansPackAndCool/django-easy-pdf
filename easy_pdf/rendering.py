@@ -89,7 +89,8 @@ def encode_filename(filename):  # type: (Text) -> Text
         return "filename*=UTF-8''%s" % quoted
 
 
-def make_response(content, download_filename=None, content_type=CONTENT_TYPE, response_class=HttpResponse):
+def make_response(content, download_filename=None, content_type=CONTENT_TYPE, response_class=HttpResponse,
+                  inline_filename=None):
     # type: (bytes, Optional[Text], Text, Type[HttpResponse]) -> HttpResponse
     """
     Wraps file content into HTTP response.
@@ -103,6 +104,7 @@ def make_response(content, download_filename=None, content_type=CONTENT_TYPE, re
     :param str download_filename: Optional filename for file download
     :param str content_type: Response content type
     :param response_class: Response class to instantiate
+    :param inline_filename: Optional filename for file when displayed in browser
 
     :rtype: :class:`django.http.HttpResponse`
     :returns: Django response
@@ -110,6 +112,8 @@ def make_response(content, download_filename=None, content_type=CONTENT_TYPE, re
     response = response_class(content, content_type=content_type)
     if download_filename is not None:
         response["Content-Disposition"] = "attachment; %s" % encode_filename(download_filename)
+    if inline_filename is not None:
+        response["Content-Disposition"] = "inline; %s" % encode_filename(inline_filename)
     return response
 
 
@@ -135,6 +139,7 @@ def render_to_pdf(template, context, using=None, request=None, **render_kwargs):
 def render_to_pdf_response(request, template, context, using=None,
                            download_filename=None, content_type=CONTENT_TYPE,
                            response_class=HttpResponse,
+                           inline_filename=None,
                            **render_kwargs):
     # type: (HttpRequest, Text, Dict, Any, Optional[Text], Text, Type[HttpResponse], Any) -> HttpResponse
     """
@@ -152,6 +157,7 @@ def render_to_pdf_response(request, template, context, using=None,
     :param str download_filename: Optional filename to use for file download
     :param str content_type: Response content type
     :param response_class: Default is :class:`django.http.HttpResponse`
+    :param str inline_filename: Optional filename to use for file when displayed in browser
 
     :rtype: :class:`django.http.HttpResponse`
     :returns: Django HTTP response
@@ -159,7 +165,8 @@ def render_to_pdf_response(request, template, context, using=None,
     Additional ``**render_kwargs`` are passed to :func:`html_to_pdf`.
     """
     pdf = render_to_pdf(template, context, using=using, request=request, **render_kwargs)
-    return make_response(pdf, download_filename, content_type=content_type, response_class=response_class)
+    return make_response(pdf, download_filename, content_type=content_type, response_class=response_class,
+                         inline_filename=inline_filename)
 
 
 def render_to_content_file(template, context, using=None, **render_kwargs):
