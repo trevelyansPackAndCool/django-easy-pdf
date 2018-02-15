@@ -93,9 +93,15 @@ class PDFTemplateView(PDFTemplateResponseMixin, ContextMixin, View):
             template_name = "hello.html"
     """
 
+    #: Optional name of the PDF file when displayed in browser.
+    inline_filename = ''
+
     def get(self, request, *args, **kwargs):  # type: (HttpRequest, Any, Any) -> HttpResponse
         """
         Handles GET request and returns HTTP response.
         """
         context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+        response = self.render_to_response(context)
+        if self.inline_filename:
+            response['Content-Disposition'] = 'inline; filename="{}"'.format(self.inline_filename)
+        return response
