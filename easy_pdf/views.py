@@ -20,7 +20,7 @@ class PDFTemplateResponseMixin(TemplateResponseMixin):
     """
 
     #: Optional name of the PDF file when displayed in browser.
-    inline_filename = ''
+    inline_filename = ''  # type: Optional[Text]
 
     #: Optional name of the PDF file for download. Leave blank for display in browser.
     download_filename = None  # type: Optional[Text]

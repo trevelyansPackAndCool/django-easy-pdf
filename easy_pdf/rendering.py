@@ -112,7 +112,7 @@ def make_response(content, download_filename=None, content_type=CONTENT_TYPE, re
     response = response_class(content, content_type=content_type)
     if download_filename is not None:
         response["Content-Disposition"] = "attachment; %s" % encode_filename(download_filename)
-    if download_filename is not None:
+    if inline_filename is not None:
         response["Content-Disposition"] = "inline; %s" % encode_filename(inline_filename)
     return response
 
