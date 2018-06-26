@@ -111,5 +111,6 @@ class PDFTemplateView(PDFTemplateResponseMixin, ContextMixin, View):
         """
         Handles GET request and returns HTTP response.
         """
-        context = self.get_context_data(**kwargs)
+        self.object = self.get_object() if hasattr(self, 'get_object') else None
+        context = self.get_context_data(object=self.object, **kwargs)
         return self.render_to_response(context)
