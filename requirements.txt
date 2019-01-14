@@ -1,17 +1,1 @@
-#django==1.11
 WeasyPrint==44
-
-# Dependencies of WeasyPrint
-#cairocffi>=0.8.0
-#CairoSVG>=2.0.2
-#cffi>=1.10.0
-#cssselect>=1.0.1
-#html5lib>=0.999999999
-#lxml>=3.7.3
-#olefile>=0.44
-#Pillow>=4.1.0
-#pycparser>=2.17
-#Pyphen>=0.9.4
-#six>=1.10.0
-#tinycss>=0.4
-#webencodings>=0.5.1
