@@ -9,7 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = "0.2.1"
+version = "0.2.3"
 
 if sys.argv[-1] == "publish":
     os.system("python setup.py sdist bdist_wheel upload")
@@ -35,8 +35,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        "django>=1.8",
-        "WeasyPrint>=0.34"
+        "WeasyPrint>=44"
     ],
     zip_safe=False,
     keywords="django-easy-pdf",
