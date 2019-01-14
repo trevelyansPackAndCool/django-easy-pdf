@@ -1,5 +1,5 @@
 django==1.11
-WeasyPrint==0.42
+WeasyPrint==44
 
 # Dependencies of WeasyPrint
 cairocffi>=0.8.0
